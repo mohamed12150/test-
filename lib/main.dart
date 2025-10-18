@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 import 'gift_manager.dart';
+import 'voice_room_page.dart';
 import 'zego_config.dart'; // ملف إعدادات Zego لديك
 
 void main() {
@@ -90,6 +91,19 @@ class _LiveStartPageState extends State<LiveStartPage> {
               ],
               selected: {_role},
               onSelectionChanged: (s) => setState(() => _role = s.first),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                icon: const Icon(Icons.mic),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const VoiceRoomStartPage()),
+                  );
+                },
+                label: const Text('Voice Room'),
+              ),
             ),
             const Spacer(),
             SizedBox(
