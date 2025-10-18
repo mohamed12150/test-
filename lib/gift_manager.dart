@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
@@ -8,7 +9,9 @@ class GiftModel {
   final String key;
   final String label;
   final String url;
-  const GiftModel({required this.key, required this.label, required this.url});
+  final String? sound;
+  
+  const GiftModel({required this.key, required this.label, required this.url, this.sound});
 }
 
 /// روابط Lottie من الإنترنت (مجانية من LottieFiles)
@@ -17,6 +20,7 @@ const availableGifts = [
     key: 'giftbox1',
     label: '🎁',
     url: 'assets/gifts/Gift Box Lottie.json',
+    sound: 'sounds/pop.mp3',
   ),
 
 
@@ -24,11 +28,13 @@ const availableGifts = [
     key: 'giftbox4',
     label: '💐',
     url: 'assets/gifts/Rose Lottie.json',
+    sound: 'sounds/crowd-cheer.mp3',
   ),
   GiftModel(
     key: 'giftbox5',
     label: '🎊 بالونات',
-    url: 'assets/gifts/Balloons Lottie.json',
+    url: 'assets/gifts/Flying Balloons.json',
+    sound: "sounds/fireworks.mp3",
   ),
   GiftModel(
     key: 'giftbox6',
@@ -102,10 +108,16 @@ class GiftManager {
       await liveController.message.send('GIFT:${gift.key}');
     } catch (_) {}
   }
-
+final _audioPlayer = AudioPlayer()
+  ..setReleaseMode(ReleaseMode.stop)
+  ..setVolume(1.0);
   /// تشغيل الهدية محليًا
-  void playGift(GiftModel gift) {
+  void playGift(GiftModel gift) async {
     currentUrl = gift.url;
+  
+    if (gift.sound != null) {
+    await _audioPlayer.play(AssetSource(gift.sound!));
+  }
   }
 }
 

@@ -37,7 +37,7 @@ dependencies:
   zego_uikit_prebuilt_live_streaming: ^3.14.7
   lottie: ^3.1.2
   archive: ^4.0.7
-
+  audioplayers: ^6.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,6 +61,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/gifts/
+    - assets/sounds/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
